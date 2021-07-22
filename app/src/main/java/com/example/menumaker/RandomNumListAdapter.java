@@ -3,6 +3,7 @@ package com.example.menumaker;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,10 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Random;
 
 public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
-    private Random random;
+    //private Random random;
+    RecipeList mRecipeList;
 
-    public RandomNumListAdapter(int seed) {
-        this.random = new Random(seed);
+    public RandomNumListAdapter(RecipeList recipeList) {
+        this.mRecipeList = recipeList;
     }
 
     @Override
@@ -31,11 +33,15 @@ public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        holder.getView().setText(String.valueOf(random.nextInt()));
+        //holder.getView().setText(String.valueOf(random.nextInt()));
+        holder.getView().setText(String.valueOf(mRecipeList.getRecipeAtPosition(position)));
     }
 
     @Override
     public int getItemCount() {
-        return 100;
+        return mRecipeList.getNumRecipes();
+        //return 100;
     }
+
+
 }

@@ -30,7 +30,7 @@ public class SecondFragment extends Fragment {
     ) {
         binding = FragmentSecondBinding.inflate(inflater, container, false);
 
-        // *** TODO beginning
+        DisplayCookBook();
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_second, container, false);
 
@@ -40,24 +40,20 @@ public class SecondFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new RandomNumListAdapter(1234));
-
+        //recyclerView.setAdapter(new RandomNumListAdapter(1234));
+        recyclerView.setAdapter(new RandomNumListAdapter(mCookbook));
         return view;
-        // *** TODO end
-        //return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //DisplayCookBook();
-        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
+        /*binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(SecondFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
-        });
+        });*/
     }
 
     @Override
