@@ -20,8 +20,8 @@
     </fragment>
     <fragment
         android:id="@+id/CookBookFragment"
-        android:name="com.example.menumaker.SecondFragment"
-        android:label="@string/second_fragment_label"
+        android:name="com.example.menumaker.CookBookFragment"
+        android:label="@string/cookbook_fragment_label"
         tools:layout="@layout/fragment_second">
 
         <action
