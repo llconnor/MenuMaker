@@ -44,6 +44,14 @@ public class RecipeList implements Parcelable {
         mRecipeList = inRecipeList;
     }
 
+    RecipeList(RecipeList deepCopy) {
+        mRecipeList = new ArrayList<Recipe>();
+        for (int i = 0; i < deepCopy.Length(); i++) {
+            Recipe tempRecipe = deepCopy.getRecipeAtPosition(i);
+            addRecipe(tempRecipe);
+        }
+    }
+
     public static final Creator<RecipeList> CREATOR = new Creator<RecipeList>() {
         @Override
         public RecipeList createFromParcel(Parcel in) {
@@ -161,8 +169,7 @@ public class RecipeList implements Parcelable {
 
     public RecipeList makeMenu(int numRecipes)
     {
-        //int numRecipes = getNumRecipes();
-        RecipeList tempRecipeList = this;
+        RecipeList tempRecipeList = new RecipeList(this);
         RecipeList menuRecipeList = new RecipeList();
         Random r = new Random();
         // If we want more recipes then we have then we'll just return the list (implicitly)

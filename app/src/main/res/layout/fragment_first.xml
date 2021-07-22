@@ -4,17 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstFragment">
+    tools:context=".MainFragment">
 
-    <TextView
-        android:id="@+id/textview_first"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_menu"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_first_fragment"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-    />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
         android:id="@+id/button_make_menu"
@@ -23,16 +27,25 @@
         android:text="@string/make_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/button_first"
+        app:layout_constraintLeft_toRightOf="@id/button_view_recipes"
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
     <Button
-        android:id="@+id/button_first"
+        android:id="@+id/button_view_recipes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/view_recipes"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <Button
+        android:id="@+id/button_grocery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/grocery_list"
+        app:layout_constraintBottom_toTopOf="@id/button_make_menu"
         app:layout_constraintLeft_toLeftOf="parent"
         />
 

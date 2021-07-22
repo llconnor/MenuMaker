@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.menumaker.FirstFragment"
-        android:label="@string/first_fragment_label"
+        android:name="com.example.menumaker.MainFragment"
+        android:label="@string/menu_fragment_label"
         tools:layout="@layout/fragment_first">
 
         <action
@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_SettingFragment"
             app:destination="@id/SettingsFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_ItemFragment"
+            app:destination="@id/list" />
     </fragment>
     <fragment
         android:id="@+id/CookBookFragment"
@@ -37,6 +40,13 @@
         <action
             android:id="@+id/action_SettingsFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/list"
+        android:name="com.example.menumaker.GroceryFragment"
+        android:label="@string/item_fragment_label"
+        tools:layout="@layout/fragment_item">
+
     </fragment>
 
 </navigation>

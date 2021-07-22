@@ -89,6 +89,10 @@ public class IngredientList{
         return true;
     }
 
+    public Ingredient getIngredientAtPosition(int position) {
+        return mIngredients.get(position);
+    }
+
     ArrayList<Ingredient> getIngredientList() {
         return mIngredients;
     }

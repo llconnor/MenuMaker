@@ -8,17 +8,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.menumaker.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         LoadCookbook();
         Bundle bundle = new Bundle();
         bundle.putString("message", "Hello from llconnor");
-        FirstFragment frag_obj = new FirstFragment();
+        MainFragment frag_obj = new MainFragment();
         frag_obj.setArguments(bundle);
         // *** TODO Catch this on the other side
 
@@ -89,13 +89,19 @@ public class MainActivity extends AppCompatActivity {
         return mCookbookList;
     }
 
-    public String GetHello() {
-        return "Hello World";
-    }
-
     public RecipeList getMenuList () {
+//        if (mMenuList.Length() == 0) {
+            // TODO Remove hardcoding and replace with settings
+            mMenuList = mCookbookList.makeMenu(5);
+//        }
         return mMenuList;
     }
+
+    public IngredientList getGroceryList() {
+        ArrayList<String> grocery_list = mMenuList.GroceryList();
+        return new IngredientList(grocery_list);
+    }
+
     protected void LoadCookbook() {
         mCookbookList = new RecipeList();
         try{

@@ -2,10 +2,12 @@
     <string name="app_name">MenuMaker</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
+    <string name="menu_fragment_label">Menu Maker</string>
+    <string name="item_fragment_label">Current Menu</string>
     <string name="cookbook_fragment_label">Cook Book</string>
     <string name="view_recipes">View Recipes</string>
     <string name="make_menu">Make Menu</string>
+    <string name="grocery_list">Grocery List</string>
     <string name="previous">Previous</string>
     <string name="hello_first_fragment">No menu for the week</string>
     <string name="hello_second_fragment">Empty Recipe Book. Arg: %1$s</string>
