@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    Note that the first item is always the recipe name.  It was just easier to do it this way.-->
+<string-array name="Tacos">
+    <item>Tacos</item>
+    <item>Ground Meat</item>
+    <item>Tortillas</item>
+    <item>Taco Seasoning</item>
+    <item>Salsa</item>
+    <item>Sour Cream</item>
+    <item>Cheddar Cheese</item>
+    <item>Refried Beans</item>
+</string-array>
+<string-array name="Spaghetti">
+    <item>Spaghetti</item>
+    <item>Spaghetti Noodles</item>
+    <item>Tomato Sauce</item>
+    <item>Parmesan Cheese</item>
+    <item>Salad</item>
+</string-array>
+<string-array name="Enchiladas">
+    <item>Enchiladas</item>
+    <item>Echilada sauce packet</item>
+    <item>Ground meat</item>
+    <item>Tomato Paste</item>
+    <item>Cheddar Cheese</item>
+    <item>Green Chilis</item>
+    <item>Black Olives</item>
+    <item>Tortillas</item>
+    <item>Salsa</item>
+    <item>Sour Cream</item>
+</string-array>
+<string-array name="TacoSalad">
+    <item>Taco Salad</item>
+    <item>Ground meat</item>
+    <item>Taco seasoning</item>
+    <item>Salsa</item>
+    <item>Sour Cream</item>
+    <item>Cheddar Cheese</item>
+    <item>Tortilla chips</item>
+</string-array>
+<string-array name="BBQChickenSalad">
+    <item>BBQ Chicken Salad</item>
+    <item>BBQ Sauce</item>
+    <item>Salad</item>
+    <item>Ranch</item>
+    <item>Cool Ranch Doritos</item>
+</string-array>
+<string-array name="Meatloaf">
+    <item>Meatloaf</item>
+    <item>Ground meat</item>
+    <item>Ground pork</item>
+    <item>Bread crumbs</item>
+</string-array>
+<string-array name="ChickenSpaghetti">
+    <item>Chicken Spaghetti</item>
+    <item>Velveeta</item>
+    <item>Cream of chicken soup</item>
+    <item>Cream of celery soup</item>
+    <item>Spaghetti noodles</item>
+    <item>Chicken Breast</item>
+</string-array>
+<string-array name="MexicanChicken">
+    <item>Mexican Chicken</item>
+    <item>Chicken Breast</item>
+    <item>Green Chilis</item>
+    <item>Cream of chicken soup</item>
+    <item>Cream of celery soup</item>
+    <item>Tortillas</item>
+</string-array>
+<string-array name="PecanChicken">
+    <item>Pecan Chicken</item>
+    <item>Chicken Breast</item>
+    <item>Orange Juice</item>
+    <item>Pecans</item>
+    <item>Pimentos</item>
+</string-array>
+<string-array name="AppleChicken">
+    <item>Apple Chicken</item>
+    <item>Chicken Breast</item>
+    <item>Apples</item>
+    <item>Apple Cider Vinegar</item>
+</string-array>
+<string-array name="ChickenAndDumplings">
+    <item>Chicken and Dumplings</item>
+    <item>Whole Chicken</item>
+    <item>Heavy Whipping Cream</item>
+    <item>Celery</item>
+    <item>Onions</item>
+    <item>Carrots</item>
+    <item>Buttermilk</item>
+</string-array>
+<string-array name="FriedChicken">
+    <item>Chicken Breast</item>
+    <item>Potatoes</item>
+    <item>Vegetable Oil</item>
+    <item>Flour</item>
+</string-array>
+<string-array name="Breakfast">
+    <item>Breakfast</item>
+    <item>Eggs</item>
+    <item>Bacon</item>
+    <item>Bread</item>
+</string-array>
+<string-array name="PorkChops">
+    <item>Pork Chops</item>
+    <item>Pork Chops</item>
+    <item>Velveeta</item>
+    <item>Shells</item>
+    <item>Bread Crumbs</item>
+</string-array>
+<string-array name="Steak">
+    <item>Steak</item>
+    <item>Steak</item>
+    <item>Potatoes</item>
+</string-array>
+<string-array name="BakedChicken">
+    <item>Baked Chicken</item>
+    <item>Whole Chicken</item>
+</string-array>
+<string-array name="Lasagna">
+    <item>Lasagna</item>
+    <item>Lasagna Noodles</item>
+    <item>Spaghetti Sauce</item>
+    <item>Ground Beef</item>
+    <item>Ricotta Cheese</item>
+    <item>Mozarella Cheese</item>
+</string-array>
+<string-array name="SoupAndGrilledCheese">
+    <item>Soup and Grilled Cheese</item>
+    <item>Double noodle soup</item>
+    <item>American Cheese</item>
+    <item>Bread</item>
+</string-array>
+<string-array name="SteakFingers">
+    <item>Steak Fingers</item>
+    <item>Cheap steak</item>
+    <item>Potatoes</item>
+</string-array>
+<string-array name="ChiliAndCornbread">
+    <item>Chili and Cornbread</item>
+    <item>Ground beef</item>
+    <item>Chili packet</item>
+    <item>Chili beans</item>
+    <item>Diced tomatoes</item>
+    <item>Cornbread mix</item>
+</string-array>
+<string-array name="FritoPie">
+    <item>Frito Pie</item>
+    <item>Ground beef</item>
+    <item>Chili packet</item>
+    <item>Chili beans</item>
+    <item>Diced tomatoes</item>
+    <item>Fritos</item>
+</string-array>
+<string-array name="Hamburgers">
+    <item>Hamburgers</item>
+    <item>Hamburger buns</item>
+    <item>Eggs</item>
+    <item>Ground beef</item>
+    <item>Tator tots</item>
+</string-array>
+<string-array name="HamburgerSteak">
+    <item>Hamburger Steak</item>
+    <item>Ground beef</item>
+    <item>Potatoes</item>
+</string-array>
+<string-array name="ChiliDogs">
+    <item>Chili Dogs</item>
+    <item>Ground beef</item>
+    <item>Chili packet</item>
+    <item>Chili beans</item>
+    <item>Diced tomatoes</item>
+    <item>Hot dogs</item>
+    <item>Hot dog buns</item>
+</string-array>
+<string-array name="ShrimpScampi">
+    <item>Shrimp Scampi</item>
+    <item>Shrimp</item>
+    <item>Spaghetti</item>
+    <item>Garlic</item>
+</string-array>
+<string-array name="BBQChicken">
+    <item>BBQ Chicken</item>
+    <item>BBQ Sauce</item>
+    <item>Chicken Breast</item>
+</string-array>
+<string-array name="YellowRiceAndChicken">
+    <item>Yellow Rice and Chicken</item>
+    <item>Yellow Rice</item>
+    <item>Chicken Breast</item>
+</string-array>
+<string-array name="RedBeansAndRice">
+    <item>Red Beans and Rice</item>
+    <item>Red Beans and Rice</item>
+    <item>Andoille Sausage</item>
+</string-array>
+<string-array name="ChickenCaesarSaladPitas">
+    <item>Chicken Caesar Salad Pitas</item>
+    <item>Chicken Breast</item>
+    <item>Caesar Salad Mix</item>
+    <item>Pita Bread</item>
+</string-array>
+<string-array name="SloppyJoes">
+    <item>Sloppy Joes</item>
+    <item>Sloppy Joe mix</item>
+    <item>Ground beef</item>
+    <item>Hamburger Buns</item>
+</string-array>
+<string-array name="ShrimpEtouffee">
+    <item>Shrimp Etouffee</item>
+    <item>Shrimp</item>
+    <item>Onion</item>
+    <item>Celery</item>
+    <item>Garlic</item>
+    <item>Green Pepper</item>
+    <item>Tomato Sauce</item>
+    <item>Rice</item>
+</string-array>
+<string-array name="CreamyHerbedPorkChops">
+    <item>Creamy Herbed Pork Chops</item>
+    <item>Pork Chops</item>
+    <item>Carrots</item>
+    <item>Beef Bouillon</item>
+    <item>White Wine</item>
+    <item>Milk</item>
+</string-array>
+<string-array name="SpaghettiPie">
+    <item>Spaghetti Pie</item>
+    <item>Spaghetti</item>
+    <item>Eggs</item>
+    <item>Ground beef</item>
+    <item>Onion</item>
+    <item>Green Pepper</item>
+    <item>Spaghetti Sauce</item>
+    <item>Mozzarella</item>
+</string-array>
+<string-array name="ChiliMacSkillet">
+    <item>Chili Mac Skillet</item>
+    <item>Ground beef</item>
+    <item>Chili Packet</item>
+    <item>Chili Beans</item>
+    <item>Macaroni</item>
+    <item>Green Chilis</item>
+    <item>Cheddar Cheese</item>
+    <item>Diced Tomatoes</item>
+</string-array>
+<string-array name="MeatStuffedPitaPockets">
+    <item>Meat Stuffed Pita Pockets</item>
+    <item>Sour Cream</item>
+    <item>Ground beef</item>
+    <item>Carrots</item>
+    <item>Pita Bread</item>
+    <item>Lettuce</item>
+</string-array>
+<string-array name="ChickenNuggets">
+    <item>Chicken Nuggets</item>
+    <item>Chicken Nuggets</item>
+</string-array>
+<string-array name="ChickenDijon">
+    <item>Chicken Dijon</item>
+    <item>Rice</item>
+    <item>Chicken Breast</item>
+    <item>Milk</item>
+</string-array>
+<string-array name="ChickenJambalaya">
+    <item>Chicken Jambalaya</item>
+    <item>Celery</item>
+    <item>Onion</item>
+    <item>Green Pepper</item>
+    <item>Diced Tomatoes</item>
+    <item>Chicken Broth</item>
+    <item>Rice</item>
+    <item>Chicken Breast</item>
+</string-array>
+<array name="Recipes">
+    <item>@array/Tacos</item>
+    <item>@array/Spaghetti</item>
+    <item>@array/Enchiladas</item>
+    <item>@array/TacoSalad</item>
+    <item>@array/BBQChickenSalad</item>
+    <item>@array/Meatloaf</item>
+    <item>@array/ChickenSpaghetti</item>
+    <item>@array/MexicanChicken</item>
+    <item>@array/PecanChicken</item>
+    <item>@array/AppleChicken</item>
+    <item>@array/ChickenAndDumplings</item>
+    <item>@array/FriedChicken</item>
+    <item>@array/Breakfast</item>
+    <item>@array/PorkChops</item>
+    <item>@array/Steak</item>
+    <item>@array/BakedChicken</item>
+    <item>@array/Lasagna</item>
+    <item>@array/SoupAndGrilledCheese</item>
+    <item>@array/SteakFingers</item>
+    <item>@array/ChiliAndCornbread</item>
+    <item>@array/FritoPie</item>
+    <item>@array/Hamburgers</item>
+    <item>@array/HamburgerSteak</item>
+    <item>@array/ChiliDogs</item>
+    <item>@array/ShrimpScampi</item>
+    <item>@array/BBQChicken</item>
+    <item>@array/YellowRiceAndChicken</item>
+    <item>@array/RedBeansAndRice</item>
+    <item>@array/ChickenCaesarSaladPitas</item>
+    <item>@array/SloppyJoes</item>
+    <item>@array/ShrimpEtouffee</item>
+    <item>@array/CreamyHerbedPorkChops</item>
+    <item>@array/SpaghettiPie</item>
+    <item>@array/ChiliMacSkillet</item>
+    <item>@array/MeatStuffedPitaPockets</item>
+    <item>@array/ChickenNuggets</item>
+    <item>@array/ChickenDijon</item>
+    <item>@array/ChickenJambalaya</item>
+</array>
+</resources>

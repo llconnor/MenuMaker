@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">MenuMaker</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="view_recipes">View Recipes</string>
+    <string name="make_menu">Make Menu</string>
+    <string name="previous">Previous</string>
+    <string name="hello_first_fragment">No menu for the week</string>
+    <string name="hello_second_fragment">Empty Recipe Book. Arg: %1$s</string>
+    <string name="Prefs">Menu Maker Prefs</string>
+    <string name="menu_outfile">mm_menu.txt</string>
+    <!-- Label for the size preference -->
+    <string name="pref_size_label">Number of recipes</string>
+    <!-- Key name for storing size in SharedPreferences -->
+    <string name="pref_size_key" translatable="false">size</string>
+    <!-- Default for size preference -->
+    <string name="pref_size_default" translatable="false">5</string>
+    <string name="size_change_msg">Note settings change will take place on next menu creation.</string>
+    <string name="size_err_msg">You must have at least 1 recipe.</string>
+    <string name="settings_fragment_label">Settings</string>
+    <integer name="num_recipes">5</integer>
+
+</resources>
