@@ -22,17 +22,17 @@ import java.util.Scanner;
  */
 
 public class RecipeList implements Parcelable {
-    private ArrayList<Recipe> mRecipeList;
+    private final ArrayList<Recipe> mRecipeList;
 
     RecipeList() {
-        mRecipeList = new ArrayList<Recipe>();
+        mRecipeList = new ArrayList<>();
     }
 
     RecipeList(Parcel inputParcel) {
         // *** TODO: I don't like the copy/paste code here.  Is there a way I can reuse the Parcel constructor in Recipe?
-        mRecipeList = new ArrayList<Recipe>();
+        mRecipeList = new ArrayList<>();
         String recipeName = inputParcel.readString();
-        ArrayList<String> readALS = new ArrayList<String>();
+        ArrayList<String> readALS = new ArrayList<>();
         while (recipeName != null) {
             inputParcel.readStringList(readALS);
             mRecipeList.add(new Recipe(recipeName,readALS));
@@ -45,7 +45,7 @@ public class RecipeList implements Parcelable {
     }
 
     RecipeList(RecipeList deepCopy) {
-        mRecipeList = new ArrayList<Recipe>();
+        mRecipeList = new ArrayList<>();
         for (int i = 0; i < deepCopy.Length(); i++) {
             Recipe tempRecipe = deepCopy.getRecipeAtPosition(i);
             addRecipe(tempRecipe);
@@ -80,18 +80,18 @@ public class RecipeList implements Parcelable {
         for (Recipe recipe:mRecipeList) {
             boolean match = false;
             for (Recipe compRecipe:toCompare.mRecipeList) {
-                if (recipe.equals(compRecipe) == true) {
+                if (recipe.equals(compRecipe)) {
                     match = true;
                 }
             }
-            if (match == false) {
+            if (!match) {
                 return false;
             }
         }
         return true;
     }
 
-    class RecipeListException extends Exception
+    static class RecipeListException extends Exception
     {
         public RecipeListException(String message) {
             super(message);
@@ -99,12 +99,12 @@ public class RecipeList implements Parcelable {
     }
 
     public String toString() {
-        String recipeListStr = "";
+        StringBuilder recipeListStr = new StringBuilder();
         for (Recipe recipe:mRecipeList) {
-            recipeListStr += recipe.getRecipeName() + "\n";
-            recipeListStr += recipe.getIngredientList().IngredientListToString() + "\n";
+            recipeListStr.append(recipe.getRecipeName()).append("\n");
+            recipeListStr.append(recipe.getIngredientList().IngredientListToString()).append("\n");
         }
-        return recipeListStr;
+        return recipeListStr.toString();
     }
 
     public int size() {
@@ -120,16 +120,12 @@ public class RecipeList implements Parcelable {
             int id = typedArray.getResourceId(i, 0);
             if (id > 0) {
                 ingredients[i] = resource.getStringArray(id);
-                if (ingredients.length > 0) {
-                    String recipeName = ingredients[i][0].toString();
-                    if (ingredients.length == 1) {
-                        mRecipeList.add(new Recipe(recipeName));
-                    } else {
-                        String[] subIng = Arrays.copyOfRange(ingredients[i], 1, ingredients[i].length);
-                        mRecipeList.add(new Recipe(recipeName, subIng));
-                    }
+                String recipeName = ingredients[i][0];
+                if (ingredients.length == 1) {
+                    mRecipeList.add(new Recipe(recipeName));
                 } else {
-                    throw(new RecipeListException("Ingredient list cannot be 0 length.  Check XML recipe file."));
+                    String[] subIng = Arrays.copyOfRange(ingredients[i], 1, ingredients[i].length);
+                    mRecipeList.add(new Recipe(recipeName, subIng));
                 }
             } else {
                 throw(new RecipeListException("Ingredient XML is empty or malformed."));
@@ -139,7 +135,7 @@ public class RecipeList implements Parcelable {
     }
 
     public ArrayList<String> ListOfRecipeNames(){
-        ArrayList<String> retALS = new ArrayList<String>();
+        ArrayList<String> retALS = new ArrayList<>();
         for (Recipe recipe:mRecipeList)
         {
             retALS.add(recipe.getRecipeName());
@@ -175,16 +171,16 @@ public class RecipeList implements Parcelable {
         // If we want more recipes then we have then we'll just return the list (implicitly)
         while(tempRecipeList.Length() > 0 && numRecipes > 0)
         {
-            int nextchoice = r.nextInt(tempRecipeList.Length());
-            menuRecipeList.addRecipe(tempRecipeList.getRecipeAtPosition(nextchoice));
-            tempRecipeList.RemoveRecipe(nextchoice);
+            int nextChoice = r.nextInt(tempRecipeList.Length());
+            menuRecipeList.addRecipe(tempRecipeList.getRecipeAtPosition(nextChoice));
+            tempRecipeList.RemoveRecipe(nextChoice);
             numRecipes--;
         }
         return menuRecipeList;
     }
 
-    private void RemoveRecipe(int nextchoice) {
-        this.mRecipeList.remove(nextchoice);
+    private void RemoveRecipe(int nextChoice) {
+        this.mRecipeList.remove(nextChoice);
     }
 
     private void addRecipe(Recipe newRecipe) {
@@ -192,18 +188,17 @@ public class RecipeList implements Parcelable {
     }
 
     public void WriteToFile (String filename, Context context) {
-        String buffer = "";
+        StringBuilder buffer = new StringBuilder();
         File fileHandle = new File(context.getFilesDir() + filename);
         try {
             PrintWriter pout = new PrintWriter(new FileOutputStream(fileHandle));
             for (Recipe recipe:this.mRecipeList) {
-                buffer += recipe.toFileStr();
+                buffer.append(recipe.toFileStr());
             }
             pout.print(buffer);
             pout.close();
         }
         catch (FileNotFoundException e) {
-            String filePath = fileHandle.toString();
             Toast.makeText(context, "Warning...Menu could not be saved", Toast.LENGTH_LONG).show();
             e.printStackTrace();
             Log.d("WriteToFile", e.toString());
@@ -218,10 +213,7 @@ public class RecipeList implements Parcelable {
             for (String line:lineList) {
                 String [] recipeList = line.split(",");
                 String recipeName = recipeList[0];
-                ArrayList<String> ingList = new ArrayList<String>();
-                for (int i = 1; i < recipeList.length; i++) {
-                    ingList.add(recipeList[i]);
-                }
+                ArrayList<String> ingList = new ArrayList<>(Arrays.asList(recipeList).subList(1, recipeList.length));
                 addRecipe(new Recipe(recipeName, ingList));
             }
         }

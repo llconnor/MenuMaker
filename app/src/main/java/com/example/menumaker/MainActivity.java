@@ -1,11 +1,13 @@
 package com.example.menumaker;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.preference.PreferenceManager;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -35,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
-        // TODO: Figure out how to build the lists in the main and pass them down to Fragments
         LoadCookbook();
+        // *** TODO Figure out how to pass bundles
         Bundle bundle = new Bundle();
         bundle.putString("message", "Hello from llconnor");
         MainFragment frag_obj = new MainFragment();
@@ -90,18 +92,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public RecipeList getMenuList () {
-//        if (mMenuList.Length() == 0) {
-            // TODO Remove hardcoding and replace with settings
-            mMenuList = mCookbookList.makeMenu(5);
-//        }
+        mMenuList = mCookbookList.makeMenu(getMenuSizePreference());
         return mMenuList;
+    }
+
+    public int getMenuSizePreference() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String sizeKey = getString(R.string.pref_size_key);
+        String sizeDefault = getString(R.string.pref_size_default);
+        return Integer.parseInt(sharedPreferences.getString(sizeKey, sizeDefault));
     }
 
     public IngredientList getGroceryList() {
         ArrayList<String> grocery_list = mMenuList.GroceryList();
         return new IngredientList(grocery_list);
     }
-
+    
     protected void LoadCookbook() {
         mCookbookList = new RecipeList();
         try{

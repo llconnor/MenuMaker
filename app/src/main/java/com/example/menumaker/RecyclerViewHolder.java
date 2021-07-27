@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView view;
+    private final TextView view;
     public RecyclerViewHolder(@NonNull View itemView) {
         super(itemView);
         view = itemView.findViewById(R.id.randomText);

@@ -5,7 +5,7 @@ package com.example.menumaker;
  */
 
 public class Ingredient {
-    private String mIngredientName;
+    private final String mIngredientName;
     private int mCount;
 
     Ingredient(String ingredient) {
@@ -18,7 +18,7 @@ public class Ingredient {
         return mIngredientName;
     }
 
-    public String toStringWithCount() {return mIngredientName + " " + String.valueOf(mCount);}
+    public String toStringWithCount() {return mIngredientName + " " + mCount;}
 
     public void IncreaseCount(){
         mCount++;

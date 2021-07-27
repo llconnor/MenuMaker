@@ -1,29 +1,27 @@
 package com.example.menumaker;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Created by llconnor on 10/4/2017.
  */
 
 public class IngredientList{
-    private ArrayList<Ingredient> mIngredients;
+    private final ArrayList<Ingredient> mIngredients;
 
     IngredientList() {
         mIngredients = new ArrayList<>();
     }
 
     IngredientList(String[] ingredientArray) {
-        mIngredients = new ArrayList<Ingredient>();
-        for(int i = 0; i < ingredientArray.length; i++) {
-            mIngredients.add(new Ingredient(ingredientArray[i]));
+        mIngredients = new ArrayList<>();
+        for (String s : ingredientArray) {
+            mIngredients.add(new Ingredient(s));
         }
     }
 
     IngredientList(ArrayList<String> ingredientList) {
-        mIngredients = new ArrayList<Ingredient>();
+        mIngredients = new ArrayList<>();
         for (String ing: ingredientList)
         {
             mIngredients.add(new Ingredient(ing));
@@ -36,7 +34,7 @@ public class IngredientList{
     }
 
     public ArrayList<String> getIngredientsAsStringArrayList() {
-        ArrayList<String> retALS = new ArrayList<String>();
+        ArrayList<String> retALS = new ArrayList<>();
         for(Ingredient ingredient:mIngredients) {
             retALS.add(ingredient.toString());
         }
@@ -47,17 +45,17 @@ public class IngredientList{
         ArrayList<String> retALS = getIngredientsAsStringArrayList();
         for (int i = 0; i < mIngredients.size(); i++) {
             int count = mIngredients.get(i).getCount();
-            retALS.set(i,retALS.get(i) + " " + String.valueOf(count));
+            retALS.set(i,retALS.get(i) + " " + count);
         }
         return retALS;
     }
 
     public String IngredientListToString() {
-        String ingStr = "";
+        StringBuilder ingStr = new StringBuilder();
         for(Ingredient ing:mIngredients){
-            ingStr += "\t\t\t\t" + ing.toString() + "\n";
+            ingStr.append("\t\t\t\t").append(ing.toString()).append("\n");
         }
-        return ingStr;
+        return ingStr.toString();
     }
 
     IngredientList mergeIngredientLists(IngredientList listToMerge) {
@@ -70,7 +68,7 @@ public class IngredientList{
                     break;
                 }
             }
-            if(foundIng == false) {
+            if(!foundIng) {
                 mIngredients.add(inIngredient);
             }
         }
@@ -82,7 +80,7 @@ public class IngredientList{
             return false;
         }
         for (int i = 0; i < mIngredients.size(); i++) {
-            if (mIngredients.get(i).equals(toCompare.mIngredients.get(i)) == false) {
+            if (!mIngredients.get(i).equals(toCompare.mIngredients.get(i))) {
                 return false;
             }
         }

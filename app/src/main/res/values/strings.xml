@@ -23,5 +23,5 @@
     <string name="size_err_msg">You must have at least 1 recipe.</string>
     <string name="settings_fragment_label">Settings</string>
     <integer name="num_recipes">5</integer>
-
+    <string name="MenuKey">MenuKey</string>
 </resources>

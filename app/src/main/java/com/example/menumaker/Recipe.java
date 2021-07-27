@@ -3,7 +3,6 @@ package com.example.menumaker;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 
 public class Recipe implements Parcelable {
     //private ArrayList<Ingredient> mIngredients;
-    private IngredientList mIngredients;
+    private final IngredientList mIngredients;
     private String mRecipeName;
 
     Recipe (String recipeName)
@@ -34,7 +33,7 @@ public class Recipe implements Parcelable {
     protected Recipe(Parcel in) {
         mRecipeName = in.readString();
         mIngredients = new IngredientList();
-        ArrayList<String> readALS = new ArrayList<String>();
+        ArrayList<String> readALS = new ArrayList<>();
         in.readStringList(readALS);
         for (String ing: readALS)
         {
@@ -89,15 +88,15 @@ public class Recipe implements Parcelable {
     }
 
     public String toFileStr() {
-        String recipeStr = mRecipeName;
+        StringBuilder recipeStr = new StringBuilder(mRecipeName);
         for (String ing:mIngredients.getIngredientsAsStringArrayList()) {
-            recipeStr += "," + ing;
+            recipeStr.append(",").append(ing);
         }
         return recipeStr + "\n";
     }
 
     public boolean equals(Recipe toCompare) {
-        if (this.mRecipeName.equals(toCompare.mRecipeName) != true) {
+        if (!this.mRecipeName.equals(toCompare.mRecipeName)) {
             return false;
         }
         return this.mIngredients.equals(toCompare.mIngredients);

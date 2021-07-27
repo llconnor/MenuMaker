@@ -15,9 +15,6 @@ import com.example.menumaker.databinding.FragmentSecondBinding;
 public class CookBookFragment extends Fragment {
 
     private FragmentSecondBinding binding;
-    private RecipeList mCookbook;
-    private RecyclerView recyclerView;
-
 
     @Override
     public View onCreateView(
@@ -44,19 +41,16 @@ public class CookBookFragment extends Fragment {
     }
 
     protected void DisplayCookBook(View view) {
-        String recipes = "  ";
-        MainActivity activityptr = (MainActivity) getActivity();
-        mCookbook = activityptr.getCookBookList();
-        // TODO Change this to a "listView of the recipe names
-        for (int i = 0; i < mCookbook.Length(); i++) {
-            recipes += mCookbook.getRecipeAtPosition(i).getRecipeName() + "\n";
-        }
+        MainActivity activityPtr = (MainActivity) getActivity();
+        assert activityPtr != null;
+        RecipeList cookBook = activityPtr.getCookBookList();
+
         // Add the following lines to create RecyclerView
         // Got this from https://medium.com/swlh/create-recyclerview-in-android-fragment-c0f0b151125f
         // Also https://stackoverflow.com/questions/40584424/simple-android-recyclerview-example
-        recyclerView = view.findViewById(R.id.recyclerview);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new RecipeListAdapter(mCookbook));
+        recyclerView.setAdapter(new RecipeListAdapter(cookBook));
     }
 }

@@ -17,9 +17,7 @@ import android.view.ViewGroup;
  */
 public class GroceryFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
 
     /**
@@ -29,7 +27,6 @@ public class GroceryFragment extends Fragment {
     public GroceryFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static GroceryFragment newInstance(int columnCount) {
         GroceryFragment fragment = new GroceryFragment();
@@ -63,11 +60,10 @@ public class GroceryFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            MainActivity activityptr = (MainActivity) getActivity();
-            IngredientList grocerylist = activityptr.getGroceryList();
-            //recyclerView.setAdapter(new RecipeListAdapter(cookbook));
-            recyclerView.setAdapter(new IngredientListAdapter(grocerylist));
-            // Change this adapter over to be a Grocery list view
+            MainActivity activityPtr = (MainActivity) getActivity();
+            assert activityPtr != null;
+            IngredientList groceryList = activityPtr.getGroceryList();
+            recyclerView.setAdapter(new IngredientListAdapter(groceryList));
         }
         return view;
     }
