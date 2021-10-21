@@ -6,16 +6,17 @@ import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
-import android.widget.Toast;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.PrintWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  * Created by llconnor on 9/9/2017.
@@ -35,12 +36,12 @@ public class RecipeList implements Parcelable {
         ArrayList<String> readALS = new ArrayList<>();
         while (recipeName != null) {
             inputParcel.readStringList(readALS);
-            mRecipeList.add(new Recipe(recipeName,readALS));
+            mRecipeList.add(new Recipe(recipeName, readALS));
             recipeName = inputParcel.readString();
         }
     }
 
-    RecipeList (ArrayList<Recipe> inRecipeList) {
+    RecipeList(ArrayList<Recipe> inRecipeList) {
         mRecipeList = inRecipeList;
     }
 
@@ -71,15 +72,15 @@ public class RecipeList implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        for (Recipe recipe:mRecipeList) {
+        for (Recipe recipe : mRecipeList) {
             recipe.writeToParcel(dest, flags);
         }
     }
 
     public boolean equals(RecipeList toCompare) {
-        for (Recipe recipe:mRecipeList) {
+        for (Recipe recipe : mRecipeList) {
             boolean match = false;
-            for (Recipe compRecipe:toCompare.mRecipeList) {
+            for (Recipe compRecipe : toCompare.mRecipeList) {
                 if (recipe.equals(compRecipe)) {
                     match = true;
                 }
@@ -91,8 +92,7 @@ public class RecipeList implements Parcelable {
         return true;
     }
 
-    static class RecipeListException extends Exception
-    {
+    static class RecipeListException extends Exception {
         public RecipeListException(String message) {
             super(message);
         }
@@ -100,7 +100,7 @@ public class RecipeList implements Parcelable {
 
     public String toString() {
         StringBuilder recipeListStr = new StringBuilder();
-        for (Recipe recipe:mRecipeList) {
+        for (Recipe recipe : mRecipeList) {
             recipeListStr.append(recipe.getRecipeName()).append("\n");
             recipeListStr.append(recipe.getIngredientList().IngredientListToString()).append("\n");
         }
@@ -128,16 +128,15 @@ public class RecipeList implements Parcelable {
                     mRecipeList.add(new Recipe(recipeName, subIng));
                 }
             } else {
-                throw(new RecipeListException("Ingredient XML is empty or malformed."));
+                throw (new RecipeListException("Ingredient XML is empty or malformed."));
             }
         }
         typedArray.recycle();
     }
 
-    public ArrayList<String> ListOfRecipeNames(){
+    public ArrayList<String> ListOfRecipeNames() {
         ArrayList<String> retALS = new ArrayList<>();
-        for (Recipe recipe:mRecipeList)
-        {
+        for (Recipe recipe : mRecipeList) {
             retALS.add(recipe.getRecipeName());
         }
         return retALS;
@@ -145,7 +144,7 @@ public class RecipeList implements Parcelable {
 
     public ArrayList<String> GroceryList() {
         IngredientList GroceryList = new IngredientList();
-        for (Recipe recipe:mRecipeList) {
+        for (Recipe recipe : mRecipeList) {
             GroceryList.mergeIngredientLists(recipe.getIngredientList());
         }
         return GroceryList.getIngredientsAndCountAsStringArrayList();
@@ -163,14 +162,12 @@ public class RecipeList implements Parcelable {
         return mRecipeList.size();
     }
 
-    public RecipeList makeMenu(int numRecipes)
-    {
+    public RecipeList makeMenu(int numRecipes) {
         RecipeList tempRecipeList = new RecipeList(this);
         RecipeList menuRecipeList = new RecipeList();
         Random r = new Random();
         // If we want more recipes then we have then we'll just return the list (implicitly)
-        while(tempRecipeList.Length() > 0 && numRecipes > 0)
-        {
+        while (tempRecipeList.Length() > 0 && numRecipes > 0) {
             int nextChoice = r.nextInt(tempRecipeList.Length());
             menuRecipeList.addRecipe(tempRecipeList.getRecipeAtPosition(nextChoice));
             tempRecipeList.RemoveRecipe(nextChoice);
@@ -187,41 +184,54 @@ public class RecipeList implements Parcelable {
         this.mRecipeList.add(newRecipe);
     }
 
-    public void WriteToFile (String filename, Context context) {
+    public void WriteToFile(String filename, Context context) {
         StringBuilder buffer = new StringBuilder();
-        File fileHandle = new File(context.getFilesDir() + filename);
-        try {
-            PrintWriter pout = new PrintWriter(new FileOutputStream(fileHandle));
-            for (Recipe recipe:this.mRecipeList) {
+        try (FileOutputStream fou = context.openFileOutput(filename, Context.MODE_PRIVATE)) {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fou);
+            for (Recipe recipe : this.mRecipeList) {
                 buffer.append(recipe.toFileStr());
             }
-            pout.print(buffer);
-            pout.close();
-        }
-        catch (FileNotFoundException e) {
-            Toast.makeText(context, "Warning...Menu could not be saved", Toast.LENGTH_LONG).show();
+            outputStreamWriter.write(buffer.toString());
+            outputStreamWriter.close();
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
+/*           Toast.makeText(context, "Warning...Menu could not be saved", Toast.LENGTH_LONG).show();
             Log.d("WriteToFile", e.toString());
+        }
+         */
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    public void ReadFromFile (String filename, Context context) {
-        try {
-            String content = new Scanner(new File(context.getFilesDir() + filename))
-                    .useDelimiter("\\Z").next();
-            String [] lineList = content.split("\n");
-            for (String line:lineList) {
-                String [] recipeList = line.split(",");
-                String recipeName = recipeList[0];
-                ArrayList<String> ingList = new ArrayList<>(Arrays.asList(recipeList).subList(1, recipeList.length));
-                addRecipe(new Recipe(recipeName, ingList));
+    // TODO: Why is this so fundamentally different than ReadRecipeFile (?)
+    public void ReadFromFile(String filename, Context context) {
+        try (FileInputStream fin = context.openFileInput(filename)) {
+            InputStreamReader inputStreamReader = new InputStreamReader(fin);
+            try (BufferedReader reader = new BufferedReader(inputStreamReader)) {
+                String line = reader.readLine();
+                while (line != null) {
+                    // TODO: Add in error checking and or make this cleaner.
+                    String recipeName = line.substring(0, line.indexOf(","));
+                    line = line.substring(line.indexOf(",")+1);
+                    String[] lineSplit = line.split(",");
+                    Recipe tempRecipe = new Recipe(recipeName);
+                    tempRecipe.setIngredients(lineSplit);
+                    this.addRecipe(tempRecipe);
+                    line = reader.readLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.d("ReadFromFile", e.toString());
             }
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             // We don't actually need to do anything as the RecipeList will be null
-            Toast.makeText(context, "Warning...Menu could not be loaded", Toast.LENGTH_LONG).show();
+            // TODO: Figure out how to update Toast
+            //Toast.makeText(context, "Warning...Menu could not be loaded", Toast.LENGTH_LONG).show();
             e.printStackTrace();
             Log.d("ReadFromFile", e.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

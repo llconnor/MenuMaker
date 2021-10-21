@@ -17,18 +17,14 @@ public class MainFragment extends Fragment {
 
     private FragmentFirstBinding binding;
     private RecyclerView mRecyclerView;
-    private RecipeList mMenuList;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        View view = inflater.inflate(R.layout.fragment_second, container, false);
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
-        //return inflater.inflate(R.layout.fragment_first, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -45,8 +41,8 @@ public class MainFragment extends Fragment {
                 mRecyclerView = view.findViewById(R.id.recyclerview_menu);
                 mRecyclerView.setHasFixedSize(true);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-                MakeMenu(v);
-                mRecyclerView.setAdapter(new RecipeListAdapter(mMenuList));
+                MakeMenu();
+                mRecyclerView.setAdapter(new RecipeListAdapter(getMainMenu()));
             }
         });
 
@@ -63,9 +59,9 @@ public class MainFragment extends Fragment {
         binding.buttonGrocery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mMenuList == null) {
+                if (getMainMenu() == null) {
                     // TODO Make this a popup to ask the user to create a menu
-                    MakeMenu(view);
+                    //MakeMenu(view);
                 }
                 NavHostFragment.findNavController(MainFragment.this)
                         .navigate(R.id.action_FirstFragment_to_ItemFragment);
@@ -81,30 +77,35 @@ public class MainFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.recyclerview_menu);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        /*if (mSavedInstanceState != null) {
-            if (mSavedInstanceState.containsKey(getResources().getString(R.string.MenuKey))) {
-                mMenuList = mSavedInstanceState.getParcelable(getResources().getString(R.string.MenuKey));
-            }
+        // Todo: Figure out how to create without having to create a new menu (this works okay on the second load, but not the first because we don't yet have context)
+        if (getMainMenu() == null) {
+            //loadMenu();
+            MakeMenu();
         }
-        else {
-            // Figure out how to save this
-            MakeMenu(view);
-        }*/
-        MakeMenu(view);
-        mRecyclerView.setAdapter(new RecipeListAdapter(mMenuList));
+        mRecyclerView.setAdapter(new RecipeListAdapter(getMainMenu()));
     }
 
-    protected void MakeMenu(View view) {
+    protected void MakeMenu() {
         MainActivity activityPtr = (MainActivity) getActivity();
         assert activityPtr != null;
-        mMenuList = activityPtr.getMenuList();
+        activityPtr.buildMenuList();
     }
 
     public void saveMenu() {
-        // TODO: Save the menuList
-        /*mSavedInstanceState.putParcelable(getResources().getString(R.string.MenuKey), mMenuList);
         String filename = getResources().getString(R.string.menu_outfile);
-        mMenuList.WriteToFile(filename, this.getContext());*/
+        getMainMenu().WriteToFile(filename, this.getContext());
+    }
+
+    public void loadMenu(){
+        MainActivity activityPtr = (MainActivity) getActivity();
+        assert activityPtr != null;
+        activityPtr.loadMenu();
+    }
+
+    private RecipeList getMainMenu() {
+        MainActivity activityPtr = (MainActivity) getActivity();
+        assert activityPtr != null;
+        return activityPtr.getMenuList();
     }
 
     @Override
@@ -116,6 +117,8 @@ public class MainFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        // TODO: Only need one saveMenu, but which one
+        saveMenu();
         binding = null;
     }
 

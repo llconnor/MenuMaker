@@ -25,30 +25,26 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
     private RecipeList mCookbookList;
     private RecipeList mMenuList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityMainBinding binding;
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
         LoadCookbook();
-        // *** TODO Figure out how to pass bundles
-        Bundle bundle = new Bundle();
-        bundle.putString("message", "Hello from llconnor");
-        MainFragment frag_obj = new MainFragment();
-        frag_obj.setArguments(bundle);
-        // *** TODO Catch this on the other side
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
+        // Todo: We don't yet have application context (we should load this once we do)
+        //loadMenu();
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,8 +88,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public RecipeList getMenuList () {
-        mMenuList = mCookbookList.makeMenu(getMenuSizePreference());
         return mMenuList;
+    }
+
+    // Note: This should only ever be called if mMenuList is null
+    public void loadMenu() {
+        if (mMenuList == null) {
+            String filename = getResources().getString(R.string.menu_outfile);
+            mMenuList.ReadFromFile(filename, this);
+        }
+    }
+
+    public void buildMenuList () {
+        mMenuList = mCookbookList.makeMenu(getMenuSizePreference());
     }
 
     public int getMenuSizePreference() {
