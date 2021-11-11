@@ -74,15 +74,12 @@ public class MainFragment extends Fragment {
         super.onResume();
         View view = this.getView();
         assert view != null;
-        mRecyclerView = view.findViewById(R.id.recyclerview_menu);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        // Todo: Figure out how to create without having to create a new menu (this works okay on the second load, but not the first because we don't yet have context)
-        if (getMainMenu() == null) {
-            //loadMenu();
-            MakeMenu();
+        if (getMainMenu() != null) {
+            mRecyclerView = view.findViewById(R.id.recyclerview_menu);
+            mRecyclerView.setHasFixedSize(true);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+            mRecyclerView.setAdapter(new RecipeListAdapter(getMainMenu()));
         }
-        mRecyclerView.setAdapter(new RecipeListAdapter(getMainMenu()));
     }
 
     protected void MakeMenu() {
@@ -117,7 +114,6 @@ public class MainFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        // TODO: Only need one saveMenu, but which one
         saveMenu();
         binding = null;
     }

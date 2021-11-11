@@ -1,5 +1,6 @@
 package com.example.menumaker;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -43,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        // Todo: We don't yet have application context (we should load this once we do)
-        //loadMenu();
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadMenu();
     }
 
     @Override
@@ -95,7 +100,8 @@ public class MainActivity extends AppCompatActivity {
     public void loadMenu() {
         if (mMenuList == null) {
             String filename = getResources().getString(R.string.menu_outfile);
-            mMenuList.ReadFromFile(filename, this);
+            mMenuList = new RecipeList();
+            mMenuList.ReadFromFile(filename, getApplicationContext());
         }
     }
 
