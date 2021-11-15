@@ -30,15 +30,11 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecyclerViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        //holder.getView().setText(String.valueOf(random.nextInt()));
         holder.getView().setText(String.valueOf(mRecipeList.getRecipeAtPosition(position)));
     }
 
     @Override
     public int getItemCount() {
         return mRecipeList.getNumRecipes();
-        //return 100;
     }
-
-
 }

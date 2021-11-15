@@ -23,6 +23,8 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
+//TODO: Figure out how to get more recipes.  (ex: https://www.google.com/search?q=open+source+list+of+recipes&oq=open+source+list+of+recipes&aqs=chrome..69i57j69i64l3.5790j0j7&sourceid=chrome&ie=UTF-8)
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;

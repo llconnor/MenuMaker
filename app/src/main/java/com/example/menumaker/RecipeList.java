@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -195,10 +196,9 @@ public class RecipeList implements Parcelable {
             outputStreamWriter.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-/*           Toast.makeText(context, "Warning...Menu could not be saved", Toast.LENGTH_LONG).show();
-            Log.d("WriteToFile", e.toString());
-        }
-         */
+            Toast toast=Toast.makeText(context,"Warning...Menu could not be saved",Toast.LENGTH_SHORT);
+            toast.setMargin(50,50);
+            toast.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -226,11 +226,17 @@ public class RecipeList implements Parcelable {
             }
         } catch (FileNotFoundException e) {
             // We don't actually need to do anything as the RecipeList will be null
-            // TODO: Figure out how to update Toast
-            //Toast.makeText(context, "Warning...Menu could not be loaded", Toast.LENGTH_LONG).show();
+            Toast toast=Toast.makeText(context,"Error...Menu could not be loaded",Toast.LENGTH_SHORT);
+            toast.setMargin(50,50);
+            toast.show();
+
             e.printStackTrace();
             Log.d("ReadFromFile", e.toString());
         } catch (IOException e) {
+            Toast toast=Toast.makeText(context,"Error: IOException in loading menu",Toast.LENGTH_SHORT);
+            toast.setMargin(50,50);
+            toast.show();
+
             e.printStackTrace();
         }
     }

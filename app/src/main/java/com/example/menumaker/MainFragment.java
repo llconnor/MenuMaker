@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -29,7 +30,6 @@ public class MainFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // TODO: Figure out how to make the menu reappear when the activity is recreated.  Maybe this becomes another fragment...
 
         // Menu button
         binding.buttonMakeMenu.setOnClickListener(new View.OnClickListener() {
@@ -38,11 +38,13 @@ public class MainFragment extends Fragment {
                 // Add the following lines to create RecyclerView
                 // Got this from https://medium.com/swlh/create-recyclerview-in-android-fragment-c0f0b151125f
                 // Also https://stackoverflow.com/questions/40584424/simple-android-recyclerview-example
+                // TODO: Figure out how to make the RecyclerView not overlap with the buttons
                 mRecyclerView = view.findViewById(R.id.recyclerview_menu);
                 mRecyclerView.setHasFixedSize(true);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
                 MakeMenu();
                 mRecyclerView.setAdapter(new RecipeListAdapter(getMainMenu()));
+
             }
         });
 
@@ -60,11 +62,15 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (getMainMenu() == null) {
-                    // TODO Make this a popup to ask the user to create a menu
-                    //MakeMenu(view);
+                    Toast toast=Toast.makeText(MainFragment.super.getContext(),
+                            "No Menu found.  Please click \"Make Menu\"",Toast.LENGTH_SHORT);
+                    toast.setMargin(50,50);
+                    toast.show();
                 }
-                NavHostFragment.findNavController(MainFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_ItemFragment);
+                else {
+                    NavHostFragment.findNavController(MainFragment.this)
+                            .navigate(R.id.action_FirstFragment_to_ItemFragment);
+                }
             }
         });
     }

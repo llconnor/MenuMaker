@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+// TODO: Change this to a checklist (so we can check off items in the grocery store)
+
 /**
  * A fragment representing a list of Items.
  */
